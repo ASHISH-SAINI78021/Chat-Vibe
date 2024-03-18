@@ -1,0 +1,10 @@
+.search{
+    color: grey;
+    background-color: black;
+    margin-left: 4rem;
+}
+@media (max-width:800px) {
+    .search{
+        margin-left: 1rem;
+    }
+}

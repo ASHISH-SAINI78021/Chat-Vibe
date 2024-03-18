@@ -1,0 +1,94 @@
+.NavContainer{
+    width: 100%;
+    display: flex;
+    height: 10vh;
+    justify-content: center;
+    align-items: center;
+    gap: calc(100%/3);
+}
+.navItem{
+    /* border: 2px solid red; */
+    all: unset;
+    cursor: pointer;
+    padding: 1rem;
+    color: #f2f2f2;
+}
+.navItem:hover{
+    border-bottom: 1px solid rgba(30, 0, 255, 0.276);
+    transition: 0.3s;
+}
+.chatPage{
+    display: flex;
+    flex-direction: column;
+    max-height: 80vh;
+    overflow-y: scroll;
+}
+.mainChat{
+    color:white;
+    width: 70%;
+    max-height: 80vh;
+    height: 80vh;
+    overflow-y: scroll;
+    background-image: linear-gradient(black , rgba(128, 128, 128, 0.285) , rgba(128, 128, 128, 0.564) , rgba(128, 128, 128, 0.272));
+    border-radius: 1rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    margin-right: 1rem;
+    padding-bottom: 5rem;
+}
+.profile{
+    height: 10vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* position: fixed; */
+    background-color: #111;
+}
+.setting{
+    display: flex;
+    gap: 10px;
+    cursor: pointer;
+    margin-right: 1rem;
+}
+#one , #two , #three{
+    color: grey;
+}
+.photo{
+    display: flex;
+    gap: 10px;
+}
+/* .chat{
+    padding-top: 4rem;
+} */
+.max{
+    margin: 0.5rem;
+    float: left;
+    padding: 1rem;
+    background-color: rgba(0, 106, 255, 0.838);
+    width: 50%;
+    border-radius: 2rem;
+    color: #f2f2f2;
+}
+.susan{
+    margin: 0.5rem;
+    float: right;
+    padding: 1rem;
+    background-color: rgb(14, 209, 14);
+    width: 50%;
+    border-radius: 2rem;
+    color: #111;
+    clear: left;
+}
+
+
+@media (max-width: 800px) {
+    .NavContainer{
+        gap: calc(100%/4.5);
+    }
+    .chatPage{
+        width: 100vw;
+    }
+    .mainChat{
+        display: none;
+    }
+}

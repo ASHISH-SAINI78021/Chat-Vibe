@@ -1,0 +1,57 @@
+.component{
+    padding: 1rem;
+    border-radius: 0.3rem;
+    cursor: pointer;
+    display: flex;
+    gap: 10px;
+    color: #f2f2f2;
+}
+
+.part1{
+    display: flex;
+    gap: 20px;
+    width: 100%;
+    background-color: rgba(128, 128, 128, 0.345);
+    backdrop-filter: blur(10px);
+    border-radius: 1rem;
+    padding: 1rem;
+}
+.part1:hover{
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.498);
+    background-color: rgba(0, 106, 255, 0.749);
+    transition: 0.5s;
+}
+.img{
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 10rem;
+}
+.img1{
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 10rem;
+}
+.light{
+    font-weight: 100;
+}
+.description{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.notifications{
+    align-self: flex-start;
+}
+
+@media (max-width:800px){
+    .component{
+        width: 100%;
+    }
+    .notifications{
+        margin-left: -3rem;
+    }
+    .text{
+        width: 60%;
+        overflow: hidden;
+    }
+}

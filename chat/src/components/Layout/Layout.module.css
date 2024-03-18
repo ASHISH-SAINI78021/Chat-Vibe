@@ -1,0 +1,17 @@
+
+.inputfield{
+    width: 100%;
+    border-radius: 1.5rem;
+    border: 1px solid #1FCEC3;
+    padding: 0.5rem;
+    color: black;
+    z-index: 2;
+}
+.users{
+    background-color: #1fcec237;
+    border-radius: 1rem;
+    padding: 0.5rem 1rem;
+}
+.icon{
+    cursor: pointer;
+}
