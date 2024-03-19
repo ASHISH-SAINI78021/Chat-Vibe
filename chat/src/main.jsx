@@ -9,6 +9,7 @@ import Chat from "./components/context/chat.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <Chat>
+    <Toaster/>
     <BrowserRouter>
       <Toaster />
       <AuthProvider>

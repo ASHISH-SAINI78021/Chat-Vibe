@@ -17,7 +17,7 @@ module.exports.searchController = async (req, res) => {
                 keyword,
                 { _id: { $ne: req.user._id } }
             ]
-        }).exec();
+        }).select("-password").select("-answer").exec();
         
         // Send the response with the found users
         return res.json({

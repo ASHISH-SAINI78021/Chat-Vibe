@@ -11,6 +11,13 @@
     background-color: #1fcec237;
     border-radius: 1rem;
     padding: 0.5rem 1rem;
+    cursor: pointer;
+}
+.selectedUser{
+    background-color: rgba(172, 255, 47, 0.728);
+    border-radius: 1rem;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
 }
 .icon{
     cursor: pointer;

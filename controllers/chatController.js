@@ -112,14 +112,18 @@ module.exports.fetchChat = async(req , res)=> {
 // || create group chat route
 module.exports.createGroupChat = async(req , res)=> {
     try {
-        if (!req.body.users || req.body.name){
+        let users = req.body.selectedUser;
+        console.log(users);
+        console.log(req.body.name);
+        if (!users || !req.body.name){
             return res.send({
                 success : false ,
                 message : "Please fill all the fields"
             })
         }
-
-        const users = JSON.parse(req.body.users);
+        
+        console.log("hi");
+        users = JSON.parse(users);
 
         if (users.length < 2){
             return res.send({
