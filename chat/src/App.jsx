@@ -16,6 +16,7 @@ import Story from "./components/pages/Nav/Story";
 import Call from "./components/pages/Nav/Call";
 import PageNotFound from "./components/Layout/Routes/PageNotFound";
 import Private from "./components/Layout/Routes/Private";
+import GroupChat from "./components/pages/Chat/GroupChat/GroupChat";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
 
         <Route path="/dashboard/*" element={<Private />}>
           <Route path="" element={<Chat />} />
+          <Route path="group" element={<GroupChat />} />
           <Route path="chats" element={<Chat />} />
           <Route path="story" element={<Story />} />
           <Route path="call" element={<Call />} />

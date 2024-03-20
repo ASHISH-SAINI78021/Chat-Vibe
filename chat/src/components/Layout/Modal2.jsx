@@ -3,16 +3,20 @@ import { Button, Modal } from "antd";
 import styles from "./Layout.module.css";
 import { useAuth } from "../context/auth";
 import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 const Modal2 = ({ setIsModalOpen, isModalOpen }) => {
   const [search, setsearch] = useState(null);
   const [users, setusers] = useState(null);
   const [selectedUser , setselectedUser] = useState(null);
   const [ok , setok] = useState(null);
   const [name , setname] = useState(null);
+  const [groupChat , setGroupChat] = useState(null);
+  const navigate = useNavigate();
   const [auth, setauth] = useAuth();
   const handleOk = () => {
     setIsModalOpen(false);
     setok(true);
+    navigate("/dashboard/group");
   };
   const handleCancel = () => {
     setIsModalOpen(false);
@@ -69,7 +73,7 @@ const Modal2 = ({ setIsModalOpen, isModalOpen }) => {
   useEffect(()=> {
     const init = async()=> {
       try {
-        let response = fetch("http://localhost:8080/api/v1/chat/group" , {
+        let response = await fetch("http://localhost:8080/api/v1/chat/group" , {
           method : "POST" ,
           headers : {
             "Content-Type" : "application/json" ,
@@ -79,8 +83,14 @@ const Modal2 = ({ setIsModalOpen, isModalOpen }) => {
         })
 
         if (response.ok){
+          // console.log(response);
           response = await response.json();
-          console.log(response);
+          // console.log(response);
+          if (response.fullGroupChat){
+            setGroupChat(response.fullGroupChat.users);
+          }
+          
+          toast.success("Group created successfuly");
         }
       } catch (err) {
         console.log(err);
@@ -88,7 +98,7 @@ const Modal2 = ({ setIsModalOpen, isModalOpen }) => {
       }
     }
     init();
-    setok(null);
+    // setok(null);
   } , [ok]);
   return (
     <>

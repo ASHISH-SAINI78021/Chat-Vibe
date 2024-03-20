@@ -1,5 +1,6 @@
 const Chat = require("../models/chat.js");
 const User = require("../models/user.js");
+const mongoose = require("mongoose");
 
 module.exports.accessChat = async(req ,res)=> {
     try {
@@ -110,55 +111,72 @@ module.exports.fetchChat = async(req , res)=> {
 }
 
 // || create group chat route
-module.exports.createGroupChat = async(req , res)=> {
+const ObjectId = mongoose.Types.ObjectId;
+
+module.exports.createGroupChat = async (req, res) => {
     try {
         let users = req.body.selectedUser;
-        console.log(users);
-        console.log(req.body.name);
-        if (!users || !req.body.name){
+        if (!users || !req.body.name) {
             return res.send({
-                success : false ,
-                message : "Please fill all the fields"
-            })
-        }
-        
-        console.log("hi");
-        users = JSON.parse(users);
-
-        if (users.length < 2){
-            return res.send({
-                success : false ,
-                message : "more than 2 users are required"
-            })
+                success: false,
+                message: "Please fill all the fields"
+            });
         }
 
-        users.push(req.user);
+        // Parse JSON if needed
+        if (typeof users === 'string') {
+            users = JSON.parse(users);
+        }
+
+        if (users.length < 2) {
+            return res.send({
+                success: false,
+                message: "more than 2 users are required"
+            });
+        }
+
+        // Convert email addresses to ObjectIds
+        const userIds = await Promise.all(users.map(async (email) => {
+            const user = await User.findOne({ email });
+            return user ? user._id : null;
+        }));
+
+        // Remove any null values (users not found)
+        const validUserIds = userIds.filter(id => id !== null);
+
+        // Add current user to the list
+        validUserIds.push(req.user);
 
         const groupChat = await Chat.create({
-            chatName : req.body.name ,
-            users : users ,
-            isGroupChat : true ,
-            groupAdmin : req.user
+            chatName: req.body.name,
+            users: validUserIds,
+            isGroupChat: true,
+            groupAdmin: req.user
         });
 
         const fullGroupChat = await Chat.findOne({
-            _id : groupChat._id
-        }).populate("users" , "-password").populate("groupAdmin" , "-password");
+            _id: groupChat._id
+        }).populate({
+            path: "users" ,
+            select: "-password -answer"
+        }).populate("groupAdmin", "-password");
+
 
         return res.send({
-            success : true ,
+            success: true,
             fullGroupChat
-        })
+        });
 
     } catch (err) {
         console.log(err);
         return res.send({
-            success : false ,
-            message : "Got error in create group chat controller" ,
+            success: false,
+            message: "Got error in create group chat controller",
             err
-        })
+        });
     }
-}
+};
+
 
 
 // || rename group
